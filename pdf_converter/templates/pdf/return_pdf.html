@@ -1,0 +1,43 @@
+{% extends 'pdf/pdf.html' %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data" action='{% url 'download_file' %}'>
+            {% csrf_token %}
+            {% for item in pdf.1 %}
+            <div align="center">
+                <ul>                    
+                    <li>
+                        <div id="item_name" class="row cut-text">
+                            {{ item }}  
+                        </div>                        
+                            <button onclick="trim_long_name({{item}})" id="mini_button" type="submit" class="waves-effect waves-light btn-small">
+                                <i id="download_i" class="material-icons">file_download</i>
+                            </button></li>        
+                        <div>            
+                </ul>
+            </div>
+                <input type="hidden" value="{{ pdf.0 }}" name="download" multiple>
+                <input type="hidden" value="{{ item }}" name="file_name" multiple>
+            {% endfor %}
+        </form>
+        <div class="inline block">
+            <div id="zip_form">
+                <form method="POST" action="{% url 'download_zip' %}">
+                    {% csrf_token %}
+                        <button id="download_button" type="submit" class="btn waves-effect waves-light">Download Zip
+                            <i class="material-icons right">file_download</i>
+                        </button>
+                </form>
+            </div>
+            <div id="tar_form" class="inline">
+                <form method="POST" action="{% url 'download_tar' %}">
+                    {% csrf_token %}
+                        <button id="download_button" type="submit" class="btn waves-effect waves-light">Download Tar
+                            <i class="material-icons right">file_download</i>
+                        </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

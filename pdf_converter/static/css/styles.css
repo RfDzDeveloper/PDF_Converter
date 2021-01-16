@@ -1,0 +1,11 @@
+body{
+    background-color: #6d6c6c;
+}
+.nav-wrapper {
+    background-color: #221a1a;
+}
+body nav{
+    background-color: #221a1a;
+    min-height: 40px;
+    line-height: 40px;
+}
